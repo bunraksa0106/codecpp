@@ -53,6 +53,7 @@ void search(){
     int found=0; 
     int item;
     cout<<"\nEnter item that you want to find it : "; cin>>item;
+    for()
 }
 int main(){
     cout<<"\n\t\tPractice OOP with pointer and constructors";
@@ -70,49 +71,37 @@ int main(){
     getch();
     cout<<"\nCreate list (A,B or C)of Student and output on screen"<<endl;
     cout<<"\t\t====================================================="<<endl;
-    cout<<"\t\tA.Assign 7 objects to list of Student with constuctors"<<endl;
-    cout<<"\t\tB.Input list of Student n objects form keyboard"<<endl;
-    cout<<"\t\tC.Assign 7 objects to list of Student with emplementors"<<endl;
+    cout<<"\t\t1.Assign 7 objects to list of Student with constuctors"<<endl;
+    cout<<"\t\t2.Input list of Student n objects form keyboard"<<endl;
+    cout<<"\t\t3.Assign 7 objects to list of Student with emplementors"<<endl;
     cout<<"\t\t======================================================"<<endl;
-    int code,n=7,i; char ch;
-    cout<<"Enter A,B or C : "<<ch; ch=getch();
-    agian:
-    if(ch=='A'){
+    int code,n=7,i;
+    do{
+        cout<<"Enter your choice : "; cin>>code;
+        switch(code){
+            case 1:{
         cout<<"\nA.Assign 7 objects to list of student"; 
          Student obj[7]={Student(675,"Ka",9.3,"0376464"),Student(354,"Ruth",98.3,"098753"),Student(24,"Raksa",93.5,"012534"),Student(89,"henge",9.3,"09564"),Student(93,"Yojf",95.4,"02134"),Student(),Student(845,"Hneg",11.2,"0167773")};
          head();
         for(i=0;i<n;i++){
             obj[i].output();
         }
+        break;
     }
-    else if(ch=='B'){
+        case 2:{
         cout<<"\nB.Input list of Student n objects form keyboard";
         int i,n; Student obj1[100];
         cout<<"\nEnter n : "; cin>>n;
         for(i=0;i<n;i++){
             obj1[i].input();
         }
-        int code;
-        do{
-            cout<<"\nEnter code: "; cin>>code;
-            switch(code){
-                case 1:{
-                    head();
-                    for(i=0;i<n;i++)
-                    obj1[i].output();
-                    break;
-                }
-                case 2:{
-                    break;
-                }
-            }
-        }while(code!=5);
-
+        head();
+        for(i=0;i<n;i++){
+            obj1[i].output();
+        }
+        break;
+        }
     }
-    else if(ch=='C'){
-        cout<<"\nC.Assign 7 objects with emplementors";
-    }
-    else
-    goto again();
+    }while(code!=5);
     return 0;
 }
