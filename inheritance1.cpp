@@ -40,11 +40,11 @@ test::test(){
     data1=90;
     strcpy(data2,"Bun Raksa");
 }
-test::test(int data1,char* data2[25]){
+test::test(int data1,char data2[25]){
     this->data1=data1;
-    strcpy{this->data2=data2};
+    strcpy(this->data2,"I m Bun Raksa");
 }
 int main(){
-    cout<<"\n";
+    cout<<"\nCreate data with OOP and Inheritance";
     return 0;
 }
