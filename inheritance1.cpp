@@ -87,13 +87,15 @@ int main(){
     cout<<"\n3.2.Press Search sort update...";
     getch();
     cout<<"\n3.3.Create n objects from keyboard ";
-    int n;
     cout<<"\nEnter n: "; cin>>n;
     sample *Pobj; Pobj=new sample[n];
     for(i=0;i<n;i++){
         cout<<"\nSample["<<i<<"]";
         Pobj[i].inputall();
     }
-    
+    cout<<"\nOutput all ";
+    for(i=0;i<n;i++){
+        Pobj[i].outputall();
+    }
     return 0;
 }
