@@ -44,6 +44,10 @@ Person::Person(int code, char *Name){
     this->code = code;
     strcpy(name, Name);
 }
+Person::Person() {
+    code = 0;
+    strcpy(name, "Unknown");
+}
 Worker::Worker(int code, char *Name, int hour, double salary) : Person(code, Name) {
     this->hour = hour;
     this->salary = salary;
@@ -89,6 +93,20 @@ void SortSalary(Worker obj[100], int n){
 }
 int main(){
     cout<<"\nPractice with Inheritance";
+    cout<<"\nBase Class Person"; int i,n; n=5;
+    Person *obj[5]={
+        new Person(101, "Alice"),
+        new Person(102, "Bob"),
+        new Person(103, "Charlie"),
+        new Person(104, "David"),
+        new Person(105, "Eve")
+    };
+    for(i=0;i<n;i++){
+        cout<<"\nPerson "<<i+1<<": ";
+        obj[i]->output();
+    }
+    getch();
+    cout<<"\nDerived Class Worker from Base Class Person";
     cout<<"\na.Assign Values to Object";
     cout<<"\nb.Input from Keyboard";
     cout<<"\nc.Exit program";
@@ -143,37 +161,3 @@ int main(){
         cout<<"\nExiting...";}
         return 0;
     }
-//     Worker obj[100];
-//     int n, choice;
-//     char Item[25];
-//     cout<<"\nEnter Number of Workers: "; cin>>n;
-//     for(int i=1;i<n;i++){
-//         cout<<"\nEnter Details of Worker "<<i<<": ";
-//         obj[i].input();
-//     }
-//     do{
-//         cout<<"\n1. Search by Name";
-//         cout<<"\n2. Sort by Salary";
-//         cout<<"\n3. Show All Workers";
-//         cout<<"\n4. Exit";
-//         cout<<"\nEnter your choice: "; cin>>choice;
-//         switch(choice){
-//             case 1:
-//                 cout<<"\nEnter Name to Search: "; cin.ignore(); cin.getline(Item, 25);
-//                 cout<<"\nCode\tName\tHour\tSalary";
-//                 SearchName(obj, n, Item);
-//                 break;
-//             case 2:
-//                 SortSalary(obj, n);
-//                 break;
-//             case 3:
-//                 // Worker::Showall();
-//                 break;
-//             case 4:
-//                 cout<<"\nExiting...";
-//                 break;
-//             default:
-//                 cout<<"\nInvalid Choice!";}
-//         }while(choice!=4);
-//     return 0;
-// }
