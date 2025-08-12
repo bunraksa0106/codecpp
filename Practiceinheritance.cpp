@@ -60,7 +60,7 @@ void Worker::output(){
 }
 void SearchName(Worker obj[100], int n, char Item[25]){
     int found = 0;
-    for(int i = 0; i < n; i++){
+    for(int i=0;i<n;i++){
         if(strcmp(obj[i].name, Item) == 0){
             cout<<"\nData after Search: ";
             obj[i].output();
@@ -73,28 +73,46 @@ void SearchName(Worker obj[100], int n, char Item[25]){
 void SortSalary(Worker obj[100], int n){
     Worker temp; int i,j;
     for(i=0;i<n;i++){
-        for(j = i+1; j<n;j++){
+        for(j= i+1;j<n;j++){
             if(obj[i].salary>obj[j].salary){
-                temp = obj[i];
-                obj[i] = obj[j];
-                obj[j] = temp;
+                temp=obj[i];
+                obj[i]=obj[j];
+                obj[j]=temp;
             }
         }
     }
     cout<<"\nData After sort";
     cout<<"\nCode\tName\tHour\tSalary";
-    for(int i = 0; i < n; i++){
+    for(i=0;i<n;i++){
         obj[i].output();
     }
 }
 int main(){
     cout<<"\nPractice with Inheritance";
-    Worker obj[100];
+    cout<<"\na.Assign Values to Object";
+    cout<<"\nb.Input from Keyboard";
+    cout<<"\nc.Exit program";
+    char ch;
+    cout<<"\nEnter your choice: "; cin>>ch;
+    if(ch == 'a' || ch == 'A'){
+        Worker obj[100] = {
+            Worker(168, "Athy", 40, 1000),
+            Worker(221, "Bath", 35, 1200),
+            Worker(334, "Ka", 45, 900)
+        };
+        cout<<"\nData after Assigning Values to Object";
+        cout<<"\nCode\tName\tHour\tSalary";
+        for(int i=0;i<3;i++){
+            obj[i].output();
+        }
+    } else if(ch == 'b' || ch == 'B'){
+        cout<<"\nInput from Keyboard";
+            Worker obj[100];
     int n, choice;
     char Item[25];
     cout<<"\nEnter Number of Workers: "; cin>>n;
-    for(int i = 0; i < n; i++){
-        cout<<"\nEnter Details of Worker "<<i+1<<": ";
+    for(int i=1;i<n;i++){
+        cout<<"\nEnter Details of Worker "<<i<<": ";
         obj[i].input();
     }
     do{
@@ -121,5 +139,41 @@ int main(){
             default:
                 cout<<"\nInvalid Choice!";}
         }while(choice!=4);
-    return 0;
-}
+    } else {
+        cout<<"\nExiting...";}
+        return 0;
+    }
+//     Worker obj[100];
+//     int n, choice;
+//     char Item[25];
+//     cout<<"\nEnter Number of Workers: "; cin>>n;
+//     for(int i=1;i<n;i++){
+//         cout<<"\nEnter Details of Worker "<<i<<": ";
+//         obj[i].input();
+//     }
+//     do{
+//         cout<<"\n1. Search by Name";
+//         cout<<"\n2. Sort by Salary";
+//         cout<<"\n3. Show All Workers";
+//         cout<<"\n4. Exit";
+//         cout<<"\nEnter your choice: "; cin>>choice;
+//         switch(choice){
+//             case 1:
+//                 cout<<"\nEnter Name to Search: "; cin.ignore(); cin.getline(Item, 25);
+//                 cout<<"\nCode\tName\tHour\tSalary";
+//                 SearchName(obj, n, Item);
+//                 break;
+//             case 2:
+//                 SortSalary(obj, n);
+//                 break;
+//             case 3:
+//                 // Worker::Showall();
+//                 break;
+//             case 4:
+//                 cout<<"\nExiting...";
+//                 break;
+//             default:
+//                 cout<<"\nInvalid Choice!";}
+//         }while(choice!=4);
+//     return 0;
+// }
