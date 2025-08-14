@@ -66,7 +66,7 @@ void SearchName(Worker obj[100], int n, char Item[25]){
     int found = 0;
     for(int i=0;i<n;i++){
         if(strcmp(obj[i].name, Item) == 0){
-            cout<<"\nData after Search: ";
+            cout<<"\nCode\tName\tHour\tSalary";
             obj[i].output();
             found = 1;
         }
@@ -95,69 +95,78 @@ int main(){
     cout<<"\nPractice with Inheritance";
     cout<<"\nBase Class Person"; int i,n; n=5;
     Person *obj[5]={
-        new Person(101, "Alice"),
-        new Person(102, "Bob"),
-        new Person(103, "Charlie"),
-        new Person(104, "David"),
-        new Person(105, "Eve")
+        new Person(101, "Rith"),
+        new Person(102, "ZinII"),
+        new Person(103, "PaPaN"),
+        new Person(104, "BroVin"),
+        new Person(105, "TK")
     };
+    cout<<"\nCode\tName";
     for(i=0;i<n;i++){
-        cout<<"\nPerson "<<i+1<<": ";
         obj[i]->output();
     }
     getch();
     cout<<"\nDerived Class Worker from Base Class Person";
-    cout<<"\na.Assign Values to Object";
-    cout<<"\nb.Input from Keyboard";
-    cout<<"\nc.Exit program";
-    char ch;
-    cout<<"\nEnter your choice: "; cin>>ch;
-    if(ch == 'a' || ch == 'A'){
-        Worker obj[100] = {
-            Worker(168, "Athy", 40, 1000),
-            Worker(221, "Bath", 35, 1200),
-            Worker(334, "Ka", 45, 900)
-        };
-        cout<<"\nData after Assigning Values to Object";
-        cout<<"\nCode\tName\tHour\tSalary";
-        for(int i=0;i<3;i++){
-            obj[i].output();
-        }
-    } else if(ch == 'b' || ch == 'B'){
-        cout<<"\nInput from Keyboard";
-            Worker obj[100];
-    int n, choice;
-    char Item[25];
-    cout<<"\nEnter Number of Workers: "; cin>>n;
-    for(int i=1;i<n;i++){
-        cout<<"\nEnter Details of Worker "<<i<<": ";
-        obj[i].input();
-    }
+    cout<<"\n1. Assign Values to Object";
+    cout<<"\n2. Input from Keyboard";
+    cout<<"\n3. Exit program";
+    int code;
     do{
-        cout<<"\n1. Search by Name";
-        cout<<"\n2. Sort by Salary";
-        cout<<"\n3. Show All Workers";
-        cout<<"\n4. Exit";
-        cout<<"\nEnter your choice: "; cin>>choice;
-        switch(choice){
-            case 1:
-                cout<<"\nEnter Name to Search: "; cin.ignore(); cin.getline(Item, 25);
+        cout<<"\nEnter your choice: "; cin>>code;
+        switch(code){
+            case 1:{
+                Worker obj[100] = {
+                    Worker(168, "Athy", 40, 1000),
+                    Worker(221, "Bath", 35, 1200),
+                    Worker(334, "Ka", 45, 900)
+                };
+                cout<<"\nData after Assigning Values to Object";
                 cout<<"\nCode\tName\tHour\tSalary";
-                SearchName(obj, n, Item);
+                for(int i=0;i<3;i++){
+                    obj[i].output();
+                }
                 break;
-            case 2:
-                SortSalary(obj, n);
-                break;
-            case 3:
-                // Worker::Showall();
-                break;
-            case 4:
-                cout<<"\nExiting...";
-                break;
-            default:
-                cout<<"\nInvalid Choice!";}
-        }while(choice!=4);
-    } else {
-        cout<<"\nExiting...";}
-        return 0;
-    }
+            } 
+            case 2:{
+                cout<<"\nInput from Keyboard";
+                Worker obj[100];
+                int n, choice;
+                char Item[25];
+                cout<<"\nEnter Number of Workers: "; cin>>n;
+                for(int i=0;i<n;i++){
+                    cout<<"\nEnter Details of Worker "<<i+1<<": ";
+                    obj[i].input();
+                }
+                do{
+                    cout<<"\n1. Search by Name";
+                    cout<<"\n2. Sort by Salary";
+                    cout<<"\n3. Show All Workers";
+                    cout<<"\n4. Exit";
+                    cout<<"\nEnter your choice: "; cin>>choice;
+                    switch(choice){
+                        case 1:
+                            cout<<"\nEnter Name to Search: "; cin.ignore(); cin.getline(Item, 25);
+                            cout<<"\nCode\tName\tHour\tSalary";
+                            SearchName(obj, n, Item);
+                            break;
+                        case 2:
+                            SortSalary(obj, n);
+                            break;
+                        case 3:
+                            // Worker::Showall();
+                            break;
+                        case 4:
+                            cout<<"\nExiting...";
+                            break;
+                        default:
+                            cout<<"\nInvalid Choice!";
+                    }
+                }while(choice!=4);  
+                break;   
+            }
+            default: 
+                cout<<"\nYour choose wrong!";
+        }
+    }while(code != 3);
+    return 0;
+}
