@@ -49,6 +49,7 @@ void Worker::output(){
     cout<<"\t"<<hour;
     cout<<"\t"<<salary;
     cout<<"\t"<<getRate();
+    cout<<"\t"<<hour * getRate();
 }
 Person::Person() {
     code = 0;
@@ -67,7 +68,7 @@ void SearchName(Worker obj[100], int n, char Item[25]){
     int found = 0;
     for(int i=0;i<n;i++){
         if(strcmp(obj[i].name, Item) == 0){
-            cout<<"\nCode\tName\tHour\tSalary\tRate";
+            cout<<"\nCode\tName\tHour\tSalary\tRate\tIncome";
             obj[i].output();
             found = 1;
         }
@@ -87,7 +88,7 @@ void SortSalary(Worker obj[100], int n){
         }
     }
     cout<<"\nData After sort";
-    cout<<"\nCode\tName\tHour\tSalary\tRate";
+    cout<<"\nCode\tName\tHour\tSalary\tRate\tIncome";
     for(i=0;i<n;i++){
         obj[i].output();
     }
@@ -109,7 +110,7 @@ int main(){
                     Worker(334, "Ka", 45, 900),
                 };
                 cout<<"\nData after Assigning Values to Object";
-                cout<<"\nCode\tName\tHour\tSalary\tRate";
+                cout<<"\nCode\tName\tHour\tSalary\tRate\tIncome";
                 for(int i=0;i<3;i++){
                     obj[i].output();
                 }
@@ -140,14 +141,14 @@ int main(){
                     switch(choice){
                         case 1:
                             cout<<"\nEnter Name to Search: "; cin.ignore(); cin.getline(Item, 25);
-                            cout<<"\nCode\tName\tHour\tSalary\tRate";
+                            cout<<"\nCode\tName\tHour\tSalary\tRate\tIncome";
                             SearchName(obj, n, Item);
                             break;
                         case 2:
                             SortSalary(obj, n);
                             break;
                         case 3:
-                            cout<<"\nCode\tName\tHour\tSalary\tRate";
+                            cout<<"\nCode\tName\tHour\tSalary\tRate\tIncome";
                             for(i=0;i<n;i++){
                                 obj[i].output();
                             }
