@@ -44,6 +44,12 @@ Person::Person(int code, char *Name){
     this->code = code;
     strcpy(name, Name);
 }
+void Worker::output(){
+    Person::output();
+    cout<<"\t"<<hour;
+    cout<<"\t"<<salary;
+    cout<<"\t"<<getRate();
+}
 Person::Person() {
     code = 0;
     strcpy(name, "Unknown");
@@ -57,16 +63,11 @@ void Worker::input(){
     cout<<"\nEnter Hour: "; cin>>hour;
     cout<<"\nEnter Salary: "; cin>>salary;
 }
-void Worker::output(){
-    Person::output();
-    cout<<"\t"<<hour;
-    cout<<"\t"<<salary;
-}
 void SearchName(Worker obj[100], int n, char Item[25]){
     int found = 0;
     for(int i=0;i<n;i++){
         if(strcmp(obj[i].name, Item) == 0){
-            cout<<"\nCode\tName\tHour\tSalary";
+            cout<<"\nCode\tName\tHour\tSalary\tRate";
             obj[i].output();
             found = 1;
         }
@@ -86,26 +87,13 @@ void SortSalary(Worker obj[100], int n){
         }
     }
     cout<<"\nData After sort";
-    cout<<"\nCode\tName\tHour\tSalary";
+    cout<<"\nCode\tName\tHour\tSalary\tRate";
     for(i=0;i<n;i++){
         obj[i].output();
     }
 }
 int main(){
-    cout<<"\nPractice with Inheritance";
-    cout<<"\nBase Class Person"; int i,n; n=5;
-    Person *obj[5]={
-        new Person(101, "Rith"),
-        new Person(102, "ZinII"),
-        new Person(103, "PaPaN"),
-        new Person(104, "BroVin"),
-        new Person(105, "TK")
-    };
-    cout<<"\nCode\tName";
-    for(i=0;i<n;i++){
-        obj[i]->output();
-    }
-    getch();
+    int i,n;
     cout<<"\nDerived Class Worker from Base Class Person";
     cout<<"\n1. Assign Values to Object";
     cout<<"\n2. Input from Keyboard";
@@ -118,13 +106,19 @@ int main(){
                 Worker obj[100] = {
                     Worker(168, "Athy", 40, 1000),
                     Worker(221, "Bath", 35, 1200),
-                    Worker(334, "Ka", 45, 900)
+                    Worker(334, "Ka", 45, 900),
                 };
                 cout<<"\nData after Assigning Values to Object";
-                cout<<"\nCode\tName\tHour\tSalary";
+                cout<<"\nCode\tName\tHour\tSalary\tRate";
                 for(int i=0;i<3;i++){
                     obj[i].output();
                 }
+                cout<<"\nSearch by Name";
+                char Item[25];
+                cout<<"\nEnter Name to Search: "; cin.ignore(); cin.getline(Item,25);
+                SearchName(obj, 3, Item); getch();
+                cout<<"\nSort by Salary";
+                SortSalary(obj, 3); 
                 break;
             } 
             case 2:{
@@ -138,22 +132,25 @@ int main(){
                     obj[i].input();
                 }
                 do{
-                    cout<<"\n1. Search by Name";
+                    cout<<"\n1. Search by Name ";
                     cout<<"\n2. Sort by Salary";
-                    cout<<"\n3. Show All Workers";
+                    cout<<"\n3. Output data of Worker";
                     cout<<"\n4. Exit";
                     cout<<"\nEnter your choice: "; cin>>choice;
                     switch(choice){
                         case 1:
                             cout<<"\nEnter Name to Search: "; cin.ignore(); cin.getline(Item, 25);
-                            cout<<"\nCode\tName\tHour\tSalary";
+                            cout<<"\nCode\tName\tHour\tSalary\tRate";
                             SearchName(obj, n, Item);
                             break;
                         case 2:
                             SortSalary(obj, n);
                             break;
                         case 3:
-                            // Worker::Showall();
+                            cout<<"\nCode\tName\tHour\tSalary\tRate";
+                            for(i=0;i<n;i++){
+                                obj[i].output();
+                            }
                             break;
                         case 4:
                             cout<<"\nExiting...";
