@@ -2,6 +2,7 @@
 #include<conio.h>
 #include<string.h>
 #include<malloc.h>
+#include<fstream>
 using namespace std;
 
 class Person{
@@ -14,6 +15,8 @@ class Person{
     void output(); 
     Person();
     Person(int code=248, char *Name="Unknown");
+    int getCode(){ return code; }
+    char* getName(){ return name; }
 };
 class Worker: public Person{
     private:
@@ -28,9 +31,53 @@ class Worker: public Person{
     }
     friend void SearchName(Worker obj[100], int n, char Item[25]);
     friend void SortSalary(Worker obj[100], int n);
+    friend void Insert(Worker obj[100], int n, Worker item);
+    friend void Delete(Worker obj[100], int n, int code);
+    friend void WriteToFile(Worker obj[100], int n, const char *filename);
+    friend void ReadFromFile(Worker obj[100], int &n, const char *filename);
     Worker(int code=253,char *Name="Unknown", int hour=40, double salary=500);
     static void Showall();
 };
+// Function to write data to file
+void WriteToFile(Worker obj[100], int n, const char *filename){
+    ofstream fout(filename, ios::out);
+    if(!fout){
+        cout<<"\nError opening file for writing!";
+        return;
+    }
+    for(int i=0;i<n;i++){
+        fout<<obj[i].getCode()<<" "
+            <<obj[i].getName()<<" "
+            <<obj[i].hour<<" "
+            <<obj[i].salary<<"\n";
+    }
+    fout.close();
+    cout<<"\nData successfully written to "<<filename;
+}
+// Function to read data from file
+void ReadFromFile(Worker obj[100], int &n, const char *filename){
+    ifstream fin(filename, ios::in);
+    if(!fin){
+        cout<<"\nError opening file for reading!";
+        return;
+    }
+    n=0;
+    int code; char Name[25]; int hour; double salary;
+    while(fin>>code>>Name>>hour>>salary){
+        obj[n] = Worker(code, Name, hour, salary);
+        n++;
+    }
+    fin.close();
+    cout<<"\nData successfully read from "<<filename;
+}
+void Insert(Worker obj[100], int n, Worker item){
+    obj[n] = item;
+    cout<<"\nData after inserting new Worker";
+    cout<<"\nCode\tName\tHour\tSalary\tRate\tIncome";
+    for(int i=0;i<=n;i++){
+        obj[i].output();
+    }
+}
 void Person::input(){
     cout<<"\nEnter code: "; cin>>code;
     cout<<"\nEnter Name: "; cin.ignore(); cin.getline(name, 25);
@@ -120,7 +167,11 @@ int main(){
                 SearchName(obj, 3, Item); getch();
                 cout<<"\nSort by Salary";
                 SortSalary(obj, 3); 
-                break;
+                getch();
+                cout<<"\nInsert new Worker";
+                Worker newWorker;
+                newWorker.input();
+                Insert(obj, 3, newWorker); break;
             } 
             case 2:{
                 cout<<"\nInput from Keyboard";
@@ -133,33 +184,41 @@ int main(){
                     obj[i].input();
                 }
                 do{
-                    cout<<"\n1. Search by Name ";
-                    cout<<"\n2. Sort by Salary";
-                    cout<<"\n3. Output data of Worker";
-                    cout<<"\n4. Exit";
+                    cout<<"\nMenu:";
+                    cout<<"\n1. Write to File";
+                    cout<<"\n2. Read from File";
+                    cout<<"\n3. Search by Name ";
+                    cout<<"\n4. Sort by Salary";
+                    cout<<"\n5. Output data of Worker";
+                    cout<<"\n6. Exit";
                     cout<<"\nEnter your choice: "; cin>>choice;
                     switch(choice){
                         case 1:
+                            WriteToFile(obj, n, "data.xlsx");
+                            break;
+                        case 2:
+                            ReadFromFile(obj, n, "data.xlsx"); break;
+                        case 3:
                             cout<<"\nEnter Name to Search: "; cin.ignore(); cin.getline(Item, 25);
                             cout<<"\nCode\tName\tHour\tSalary\tRate\tIncome";
                             SearchName(obj, n, Item);
                             break;
-                        case 2:
+                        case 4:
                             SortSalary(obj, n);
                             break;
-                        case 3:
+                        case 5:
                             cout<<"\nCode\tName\tHour\tSalary\tRate\tIncome";
                             for(i=0;i<n;i++){
                                 obj[i].output();
                             }
                             break;
-                        case 4:
+                        case 6:
                             cout<<"\nExiting...";
                             break;
                         default:
                             cout<<"\nInvalid Choice!";
                     }
-                }while(choice!=4);  
+                }while(choice!=6);  
                 break;   
             }
             default: 
